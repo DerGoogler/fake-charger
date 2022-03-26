@@ -5,15 +5,23 @@ android {
 
     defaultConfig {
         applicationId "com.dergoogler.fakecharger"
-        minSdkVersion 21
+        minSdk 28
         targetSdkVersion 31
-        versionCode 1
+        versionCode 10
         versionName "1.0"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
+        }
+        debug {
+            jniDebuggable true
+            renderscriptDebuggable true
+            minifyEnabled false
+            multiDexEnabled false
+            applicationIdSuffix '.debug'
         }
     }
     compileOptions {
@@ -27,6 +35,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     def libsuVersion = '4.0.3'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"

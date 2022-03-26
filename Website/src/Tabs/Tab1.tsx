@@ -1,6 +1,8 @@
 import * as React from "react";
-import { Button, Input, List, ListItem, ListTitle } from "react-onsenui";
+import { Input, List, ListItem, ListTitle } from "react-onsenui";
 import CustomButton from "../components/CustomButton";
+import Shell from "../utils/Shell";
+import { numbersOnly } from "../utils/textFilter";
 
 interface Props {}
 
@@ -8,7 +10,6 @@ interface States {
   maxBattery: string | undefined;
   resetDelay: string | undefined;
   delayBetween: string | undefined;
-  active: boolean | undefined;
 }
 
 class Tab1 extends React.Component<Props, States> {
@@ -18,7 +19,6 @@ class Tab1 extends React.Component<Props, States> {
       maxBattery: "100",
       resetDelay: "2000",
       delayBetween: "500",
-      active: true,
     };
   }
   private delay = (time: number) => {
@@ -32,15 +32,11 @@ class Tab1 extends React.Component<Props, States> {
     }
 
     for (var i = 0; i < points.length; i++) {
-      if (this.state.active) {
-        window.android.cmd(`cmd battery set level ${points[i]}`);
-        await this.delay(Number(this.state.delayBetween));
-      } else {
-        return;
-      }
+      Shell.cmd(`cmd battery set level ${points[i]}`);
+      await this.delay(Number(this.state.delayBetween));
     }
     this.delay(Number(this.state.resetDelay)).then(() => {
-      window.android.cmd("cmd battery reset");
+      Shell.cmd("cmd battery reset");
     });
   };
 
@@ -55,7 +51,7 @@ class Tab1 extends React.Component<Props, States> {
               <Input
                 value={this.state.maxBattery}
                 onChange={(e: any) => {
-                  this.setState({ maxBattery: e.target.value });
+                  this.setState({ maxBattery: numbersOnly(e.target.value) });
                 }}
                 modifier="underbar"
                 float
@@ -69,7 +65,7 @@ class Tab1 extends React.Component<Props, States> {
               <Input
                 value={this.state.resetDelay}
                 onChange={(e: any) => {
-                  this.setState({ resetDelay: e.target.value });
+                  this.setState({ resetDelay: numbersOnly(e.target.value) });
                 }}
                 modifier="underbar"
                 float
@@ -84,7 +80,7 @@ class Tab1 extends React.Component<Props, States> {
               <Input
                 value={this.state.delayBetween}
                 onChange={(e: any) => {
-                  this.setState({ delayBetween: e.target.value });
+                  this.setState({ delayBetween: numbersOnly(e.target.value) });
                 }}
                 modifier="underbar"
                 float
@@ -94,13 +90,6 @@ class Tab1 extends React.Component<Props, States> {
           </ListItem>
         </List>
         <CustomButton onClick={this.runFake}>Run fake</CustomButton>
-        <CustomButton
-          onClick={() => {
-            window.android.cmd(`exit`);
-          }}
-        >
-          Stop
-        </CustomButton>
       </>
     );
   }

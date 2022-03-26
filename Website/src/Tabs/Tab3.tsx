@@ -3,25 +3,22 @@ import { Input, List, ListItem, ListTitle } from "react-onsenui";
 import CustomButton from "../components/CustomButton";
 import Shell from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
+
 interface Props {}
 
 interface States {
-  batteryLevel: string | undefined;
+  vibrateLevel: string | undefined;
 }
 
-class Tab2 extends React.Component<Props, States> {
+class Tab3 extends React.Component<Props, States> {
   input: React.RefObject<Input>;
   public constructor(props: any) {
     super(props);
     this.state = {
-      batteryLevel: numbersOnly(Shell.getBatteryLevel),
+      vibrateLevel: "2000",
     };
     this.input = React.createRef();
   }
-
-  private handleBatteryLevelChange = (e: any) => {
-    this.setState({ batteryLevel: numbersOnly(e.target.value) });
-  };
 
   public render = () => {
     return (
@@ -29,15 +26,17 @@ class Tab2 extends React.Component<Props, States> {
         <List>
           <ListTitle>Options</ListTitle>
           <ListItem>
-            <div className="center">Battery Level</div>
+            <div className="center">Vibrate in Seconds</div>
             <div className="right">
               <Input
-                value={this.state.batteryLevel}
-                onChange={this.handleBatteryLevelChange}
+                value={this.state.vibrateLevel}
+                onChange={(e: any) => {
+                  this.setState({ vibrateLevel: numbersOnly(e.target.value) });
+                }}
                 modifier="underbar"
                 type="n"
                 float
-                placeholder="Set fake battery"
+                placeholder="100"
               />
             </div>
           </ListItem>
@@ -45,21 +44,21 @@ class Tab2 extends React.Component<Props, States> {
 
         <CustomButton
           onClick={() => {
-            Shell.cmd(`cmd battery set level ${this.state.batteryLevel}`);
+            Shell.cmd(`cmd vibrator vibrate ${this.state.vibrateLevel}`);
           }}
         >
-          Set
+          Start
         </CustomButton>
         <CustomButton
           onClick={() => {
-            Shell.cmd(`cmd battery reset`);
+            Shell.cmd(`cmd vibrator cancel`);
           }}
         >
-          Reset
+          Cancel
         </CustomButton>
       </>
     );
   };
 }
 
-export default Tab2;
+export default Tab3;

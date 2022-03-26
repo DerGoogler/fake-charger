@@ -2,6 +2,7 @@ import * as React from "react";
 import { Page, Tab, Tabbar, Toolbar } from "react-onsenui";
 import Tab1 from "./Tabs/Tab1";
 import Tab2 from "./Tabs/Tab2";
+import Tab3 from "./Tabs/Tab3";
 
 interface Props {}
 
@@ -42,6 +43,10 @@ class App extends React.Component<Props, States> {
       {
         content: <MyTab content={<Tab2 />} />,
         tab: <Tab label="Battery" />,
+      },
+      {
+        content: <MyTab content={<Tab3 />} />,
+        tab: <Tab label="Vibrator" />,
       },
     ];
   }
