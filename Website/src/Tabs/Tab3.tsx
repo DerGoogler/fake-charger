@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input, List, ListItem, ListTitle } from "react-onsenui";
+import { Card, Col, Input, List, ListItem, ListTitle, Row } from "react-onsenui";
 import CustomButton from "../components/CustomButton";
 import Shell from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
@@ -23,6 +23,10 @@ class Tab3 extends React.Component<Props, States> {
   public render = () => {
     return (
       <>
+        <Card>
+          <strong>NOTE:</strong> This service works not on all platforms!{"\n"}
+          The app uses the native CMD bin from the superuser
+        </Card>
         <List>
           <ListTitle>Options</ListTitle>
           <ListItem>
@@ -41,21 +45,26 @@ class Tab3 extends React.Component<Props, States> {
             </div>
           </ListItem>
         </List>
-
-        <CustomButton
-          onClick={() => {
-            Shell.cmd(`cmd vibrator vibrate ${this.state.vibrateLevel}`);
-          }}
-        >
-          Start
-        </CustomButton>
-        <CustomButton
-          onClick={() => {
-            Shell.cmd(`cmd vibrator cancel`);
-          }}
-        >
-          Cancel
-        </CustomButton>
+        <Row>
+          <Col>
+            <CustomButton
+              onClick={() => {
+                Shell.cmd(`cmd vibrator vibrate ${this.state.vibrateLevel}`);
+              }}
+            >
+              Start
+            </CustomButton>
+          </Col>
+          <Col>
+            <CustomButton
+              onClick={() => {
+                Shell.cmd(`cmd vibrator cancel`);
+              }}
+            >
+              Cancel
+            </CustomButton>
+          </Col>
+        </Row>
       </>
     );
   };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input, List, ListItem, ListTitle } from "react-onsenui";
+import { Col, Input, List, ListItem, ListTitle, Row } from "react-onsenui";
 import CustomButton from "../components/CustomButton";
 import Shell from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
@@ -14,7 +14,7 @@ class Tab2 extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = {
-      batteryLevel: numbersOnly(Shell.getBatteryLevel),
+      batteryLevel: "100",
     };
     this.input = React.createRef();
   }
@@ -42,20 +42,32 @@ class Tab2 extends React.Component<Props, States> {
             </div>
           </ListItem>
         </List>
-
+        <Row>
+          <Col>
+            <CustomButton
+              onClick={() => {
+                Shell.cmd(`cmd battery set level ${this.state.batteryLevel}`);
+              }}
+            >
+              Set
+            </CustomButton>
+          </Col>
+          <Col>
+            <CustomButton
+              onClick={() => {
+                Shell.cmd(`cmd battery reset`);
+              }}
+            >
+              Reset
+            </CustomButton>
+          </Col>
+        </Row>
         <CustomButton
           onClick={() => {
-            Shell.cmd(`cmd battery set level ${this.state.batteryLevel}`);
+            this.setState({ batteryLevel: numbersOnly(Shell.getBatteryLevel) });
           }}
         >
-          Set
-        </CustomButton>
-        <CustomButton
-          onClick={() => {
-            Shell.cmd(`cmd battery reset`);
-          }}
-        >
-          Reset
+          Get current level
         </CustomButton>
       </>
     );
