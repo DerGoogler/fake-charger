@@ -29,7 +29,7 @@ const config = {
       },
       {
         test: /\.(scss|css)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader", "less-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
@@ -69,16 +69,10 @@ const config = {
     }),
   ],
   resolveLoader: {
-    modules: [
-      "node_modules",
-      path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules"),
-    ],
+    modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
   },
   resolve: {
-    modules: [
-      "node_modules",
-      path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules"),
-    ],
+    modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
     extensions: [".js", ".ts", ".jsx", ".tsx"],
   },
 };

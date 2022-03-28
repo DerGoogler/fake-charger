@@ -1,12 +1,14 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import NoRoot from "./NoRoot";
 import { PushPageProps } from "./typings/props";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 
+import "./styles/default.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "onsenui/css/onsenui-core.min.css";
-import "onsenui/css/onsen-css-components.css";
-import NoRoot from "./NoRoot";
+import "./styles/components.scss";
 
 interface Props {}
 
@@ -18,18 +20,9 @@ interface States {
 class InitActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
-
-    const checkRoot = () => {
-      if (window.android.rootAccess()) {
-        return App;
-      } else {
-        return NoRoot;
-      }
-    };
-
     const routeConfig = RouterUtil.init([
       {
-        component: checkRoot(),
+        component: App,
         props: {
           key: "main",
           pushPage: (...args: any) => this.pushPage.apply(null, args),
