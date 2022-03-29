@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("Install", (dialog, which) -> {
                         String fileName ="fake-charger-module.zip";
                         Utils.downloadFile("https://github.com/DerGoogler/fake-shell-charger/releases/download/unnamed/" + fileName, fileName);
-                        Utils.installModule("/sdcard/fake-charger/download/" + fileName);
+                        Utils.installModule("/data/local/tmp/" + fileName);
                     })
                     .show();
         }
