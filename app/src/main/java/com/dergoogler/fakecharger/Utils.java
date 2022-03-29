@@ -1,5 +1,8 @@
 package com.dergoogler.fakecharger;
 
+import android.content.Context;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
 
@@ -18,7 +21,13 @@ public class Utils {
         return Utils.cmdResult("sed -n \"s|^" + name + "=||p\" ${2:-" + modulePath + "/module.prop};");
     }
 
-    public static void installModule(String path) {
-        Shell.cmd("magisk --install-module " + path).exec();
+    public static void installModule(Context context, String path) {
+        Shell.cmd("magisk --install-module " + path).submit(result -> {
+            new MaterialAlertDialogBuilder(context)
+                    .setTitle("Module output")
+                    .setMessage(result.toString())
+                    .setNegativeButton("OK", null)
+                    .show();
+        });
     }
 }

@@ -1,0 +1,17 @@
+#!/system/bin/sh
+
+# Variables
+MAXSPEED="${_maxspeed_:=0.3}"
+MAXCHARGE="${_maxcharge_:=100}"
+MAXADD="${_maxadd_:=1}"
+
+
+i=1
+while [ $i -le $MAXCHARGE ]
+do
+    cmd battery set level $i
+    sleep $MAXSPEED
+    i=$(($i+$MAXADD))
+done
+
+exit 1

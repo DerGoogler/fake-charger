@@ -1,0 +1,3 @@
+/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/RelWithDebInfo/94r4k5s4/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/RelWithDebInfo/94r4k5s4/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/RelWithDebInfo/94r4k5s4/armeabi-v7a/CMakeFiles/native-lib.dir
