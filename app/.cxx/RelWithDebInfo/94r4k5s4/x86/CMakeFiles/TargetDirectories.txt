@@ -1,3 +1,0 @@
-/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/RelWithDebInfo/94r4k5s4/x86/CMakeFiles/rebuild_cache.dir
-/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/RelWithDebInfo/94r4k5s4/x86/CMakeFiles/edit_cache.dir
-/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/RelWithDebInfo/94r4k5s4/x86/CMakeFiles/native-lib.dir

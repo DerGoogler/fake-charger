@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.topjohnwu.superuser.Shell;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,16 +19,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Lib.requestRoot();
         // Elements
-        //TextInputEditText maxBattery = findViewById(R.id.maxBatteryEditText);
-        //TextInputEditText maxSpeed = findViewById(R.id.maxSpeedEditText);
-        //TextInputEditText maxAdd = findViewById(R.id.maxAddEditText);
-        //Button startButton = findViewById(R.id.startButton);
+        TextInputEditText maxBattery = findViewById(R.id.maxBatteryEditText);
+        TextInputEditText maxSpeed = findViewById(R.id.maxSpeedEditText);
+        TextInputEditText maxAdd = findViewById(R.id.maxAddEditText);
+        Button startButton = findViewById(R.id.startButton);
         TextInputEditText selfBattery = findViewById(R.id.selfMaxBattery);
         Button setSelfBattery = findViewById(R.id.setSelfBattery);
+        Button resetSelfBattery = findViewById(R.id.resetSelfBattery);
 
-        /*startButton.setOnClickListener((view) -> {
+        startButton.setOnClickListener((view) -> {
             final Shell.Result result;
             String speed = "export _maxspeed_=" + getText(maxSpeed);
             String add = "export _maxadd_=" + getText(maxAdd);
@@ -43,10 +45,14 @@ public class MainActivity extends AppCompatActivity {
             if (result.isSuccess()) {
                 Shell.cmd("cmd battery reset");
             }
-        });*/
+        });
 
         setSelfBattery.setOnClickListener((view) -> {
-            Lib.setBattery(getText(selfBattery));
+            Shell.cmd("cmd battery set level " + getText(selfBattery)).exec();
+        });
+
+        resetSelfBattery.setOnClickListener((view) -> {
+            Shell.cmd("cmd battery reset -f").exec();
         });
 
     }

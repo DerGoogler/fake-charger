@@ -1,3 +1,0 @@
-/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/Debug/5c2p1op3/x86_64/CMakeFiles/rebuild_cache.dir
-/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/Debug/5c2p1op3/x86_64/CMakeFiles/edit_cache.dir
-/home/jimmy/Documents/GitHub/fake-charger/app/.cxx/Debug/5c2p1op3/x86_64/CMakeFiles/native-lib.dir
