@@ -5,7 +5,11 @@ public class Lib {
             System.loadLibrary("native-lib");
     }
 
-    public static native Void exec(String command);
+    public static native void exec(String command);
+
+    public static native void requestRoot();
+
+    public static native String execResult(String command);
 
     public static native String test();
 }

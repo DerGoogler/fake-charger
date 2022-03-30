@@ -8,9 +8,6 @@ import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.topjohnwu.superuser.Shell;
-import com.topjohnwu.superuser.ShellUtils;
-
 
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView;
@@ -20,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Lib.requestRoot();
         mWebView = findViewById(R.id.activity_main_webview);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -34,12 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
             @JavascriptInterface
             public String cmdResult(String command) {
-                return ShellUtils.fastCmd(Shell.getShell(), command);
-            }
-
-            @JavascriptInterface
-            public boolean rootAccess() {
-                return Shell.rootAccess();
+                return Lib.execResult(command);
             }
         }, "Android");
     }
