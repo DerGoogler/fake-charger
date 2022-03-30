@@ -34,11 +34,11 @@ class Tab1 extends React.Component<Props, States> {
     }
 
     for (var i = 0; i < points.length; i++) {
-      new cmd(`setBattery ${points[i]}`).exec();
+      new cmd(`cmd battery set level ${points[i]}`).exec();
       await this.delay(Number(delayBetween));
     }
     this.delay(Number(resetDelay)).then(() => {
-      new cmd("resetBattery").exec();
+      new cmd("cmd battery reset -f").exec();
     });
   };
 

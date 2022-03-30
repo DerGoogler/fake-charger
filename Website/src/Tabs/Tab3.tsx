@@ -4,7 +4,6 @@ import { Col, Input, List, ListItem, ListTitle, Row, Select } from "react-onsenu
 import CustomButton from "../components/CustomButton";
 import { ref } from "../utils/ref";
 import cmd from "../utils/Shell";
-import Shellj from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
 
 interface Props {}
@@ -104,10 +103,10 @@ class Tab3 extends React.Component<Props, States> {
                 onClick={() => {
                   this.deviceSp({
                     samsung: () => {
-                      new cmd(`vibratorForSamsung ${this.state.vibrateLevel}`).exec();
+                      new cmd(`cmd vibrator vibrate ${this.state.vibrateLevel}`).exec();
                     },
                     aosp: () => {
-                      new cmd(`vibratorForAOSP ${this.state.vibrateLevel}`).exec();
+                      new cmd(`cmd vibrator_manager synced oneshot ${this.state.vibrateLevel}`).exec();
                     },
                   });
                 }}
@@ -120,10 +119,10 @@ class Tab3 extends React.Component<Props, States> {
                 onClick={() => {
                   this.deviceSp({
                     samsung: () => {
-                      new cmd(`cancelSamsungVibrator`).exec();
+                      new cmd(`cmd vibrator cancel`).exec();
                     },
                     aosp: () => {
-                      new cmd(`cancelAOSPVibrator`).exec();
+                      new cmd(`cmd vibrator_manager cancel`).exec();
                     },
                   });
                 }}
