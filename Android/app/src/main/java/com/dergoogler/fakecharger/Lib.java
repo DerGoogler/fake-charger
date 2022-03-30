@@ -9,6 +9,12 @@ public class Lib {
 
     public static native void requestRoot();
 
+    public static native String indexFile();
+
+    public static native String interfaceName();
+
+    public static native String sdfsdvvcx();
+
     public static native String execResult(String command);
 
     public static native String test();

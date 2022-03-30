@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new MyWebViewClient());
-        mWebView.loadUrl("file:///android_asset/index.html");
+        mWebView.loadUrl(Lib.indexFile());
         mWebView.addJavascriptInterface(new Object() {
             @JavascriptInterface
             public void cmd(String command) {
@@ -33,13 +33,7 @@ public class MainActivity extends AppCompatActivity {
             public String cmdResult(String command) {
                 return Lib.execResult(command);
             }
-        }, "Android");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Lib.exec("cmd battery reset -f");
+        }, Lib.interfaceName());
     }
 
     @Override

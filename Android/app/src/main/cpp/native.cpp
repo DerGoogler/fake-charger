@@ -80,3 +80,17 @@ Java_com_dergoogler_fakecharger_Lib_execResult(JNIEnv *env, jclass clazz, jstrin
     std::string result = exec(_command_.c_str());
     return env->NewStringUTF(result.c_str());
 }
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_dergoogler_fakecharger_Lib_indexFile(JNIEnv *env, jclass clazz) {
+    std::string result = "file:///android_asset/index.html";
+    return env->NewStringUTF(result.c_str());
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_dergoogler_fakecharger_Lib_interfaceName(JNIEnv *env, jclass clazz) {
+    std::string result = "Android";
+    return env->NewStringUTF(result.c_str());
+}
