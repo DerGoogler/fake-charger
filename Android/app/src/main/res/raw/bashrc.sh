@@ -47,33 +47,6 @@ unplugBattery() {
   cmd battery unplug $@
 }
 
-fakecharger() {
-   while getopts "s:hm:a:r" opt
-   do
-      case "$opt" in
-         s ) _maxspeed_="$OPTARG" ;;
-         m ) _maxcharge_="$OPTARG" ;;
-         a ) _maxadd_="$OPTARG" ;;
-      esac
-   done
-
-   MAXSPEED="${_maxspeed_:=0.3}"
-   MAXCHARGE="${_maxcharge_:=100}"
-   MAXADD="${_maxadd_:=1}"
-
-   i=1
-   while [ $i -le $MAXCHARGE ]
-   do
-      setBattery $i
-      sleep $MAXSPEED
-      i=$(($i+$MAXADD))
-   done
-
-   sleep 2
-   resetBattery -f
-   exit 1
-}
-
 vibratorForSamsung() {
   cmd vibrator vibrate $@
 }
