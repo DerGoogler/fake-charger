@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new MyWebViewClient());
-        getWindow().setStatusBarColor(0xFF0076FF);
         mWebView.loadUrl("file:///android_asset/index.html");
         mWebView.addJavascriptInterface(new Object() {
             @JavascriptInterface

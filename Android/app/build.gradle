@@ -60,8 +60,4 @@ dependencies {
     def libsuVersion = '4.0.3'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
-    implementation "com.github.topjohnwu.libsu:service:${libsuVersion}"
-    implementation "com.github.topjohnwu.libsu:io:${libsuVersion}"
-    implementation "com.github.topjohnwu.libsu:busybox:${libsuVersion}"
 }
