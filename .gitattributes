@@ -1,0 +1,4 @@
+*.css             binary
+*.css             linguist-language=plain
+*.scss		  binary
+*.scss            linguist-language=plain
