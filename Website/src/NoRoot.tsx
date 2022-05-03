@@ -16,7 +16,7 @@ class NoRoot extends React.Component {
         <Card>
           <div className="title">Missing root access</div>
           <div className="content">
-            Semes like you don't have root access. Check in your superuser app or root your phone
+            You don't have root access. Check in your SuperUser app or root your phone
           </div>
         </Card>
       </Page>

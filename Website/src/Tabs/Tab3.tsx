@@ -3,7 +3,7 @@ import { Alert } from "react-bootstrap";
 import { Col, Input, List, ListItem, ListTitle, Row, Select } from "react-onsenui";
 import CustomButton from "../components/CustomButton";
 import { ref } from "../utils/ref";
-import cmd from "../utils/Shell";
+import Shell from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
 
 interface Props {}
@@ -103,10 +103,10 @@ class Tab3 extends React.Component<Props, States> {
                 onClick={() => {
                   this.deviceSp({
                     samsung: () => {
-                      new cmd(`cmd vibrator vibrate ${this.state.vibrateLevel}`).exec();
+                      new Shell(`cmd vibrator vibrate ${this.state.vibrateLevel}`).exec();
                     },
                     aosp: () => {
-                      new cmd(`cmd vibrator_manager synced oneshot ${this.state.vibrateLevel}`).exec();
+                      new Shell(`cmd vibrator_manager synced oneshot ${this.state.vibrateLevel}`).exec();
                     },
                   });
                 }}
@@ -119,10 +119,10 @@ class Tab3 extends React.Component<Props, States> {
                 onClick={() => {
                   this.deviceSp({
                     samsung: () => {
-                      new cmd(`cmd vibrator cancel`).exec();
+                      new Shell(`cmd vibrator cancel`).exec();
                     },
                     aosp: () => {
-                      new cmd(`cmd vibrator_manager cancel`).exec();
+                      new Shell(`cmd vibrator_manager cancel`).exec();
                     },
                   });
                 }}

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Col, Input, List, ListItem, ListTitle, Row } from "react-onsenui";
 import CustomButton from "../components/CustomButton";
-import cmd from "../utils/Shell";
+import Shell from "../utils/Shell";
 import Shellj from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
 import utils from "../utils/utils";
@@ -48,7 +48,7 @@ class Tab2 extends React.Component<Props, States> {
           <Col>
             <CustomButton
               onClick={() => {
-                new cmd(`cmd battery set level ${this.state.batteryLevel}`).exec();
+                new Shell(`cmd battery set level ${this.state.batteryLevel}`).exec();
               }}
             >
               Set
@@ -57,7 +57,7 @@ class Tab2 extends React.Component<Props, States> {
           <Col>
             <CustomButton
               onClick={() => {
-                new cmd(`cmd battery reset`).exec();
+                new Shell(`cmd battery reset`).exec();
               }}
             >
               Reset

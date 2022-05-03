@@ -1,4 +1,6 @@
-export {};
+import Android from "./android";
+
+export { };
 
 declare global {
   /**
@@ -8,18 +10,8 @@ declare global {
     /**
      * Declare the custom window event (`Android`) for the WebView
      */
-    readonly android: any;
+    readonly android: Android;
   }
 
-  interface AndroidInterface {
-    cmd(command: string | undefined): void;
-    cmdResult(command: string | undefined): string;
-    rootAccess(): boolean;
-  }
-
-  interface Function {
-    exec(params: any): void;
-  }
-
-  const Android: AndroidInterface;
+  const Android: Android;
 }

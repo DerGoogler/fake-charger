@@ -1,7 +1,7 @@
 /**
  * A class providing APIs to an interactive Unix shell.
  */
-class cmd {
+class Shell {
   private command: string;
 
   public constructor(command: string) {
@@ -9,12 +9,16 @@ class cmd {
   }
 
   public exec(): void {
-    Android.cmd(this.command);
+    Android.exec(this.command);
   }
 
   public result(): string {
-    return Android.cmdResult(this.command);
+    return Android.execResult(this.command);
+  }
+
+  public static isAppGrantedRoot(): boolean {
+    return Android.isAppGrantedRoot();
   }
 }
 
-export default cmd;
+export default Shell;

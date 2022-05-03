@@ -8,6 +8,9 @@ import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.topjohnwu.superuser.Shell;
+import com.topjohnwu.superuser.ShellUtils;
+
 
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView;
@@ -25,13 +28,18 @@ public class MainActivity extends AppCompatActivity {
         mWebView.loadUrl(Lib.indexFile());
         mWebView.addJavascriptInterface(new Object() {
             @JavascriptInterface
-            public void cmd(String command) {
-                Lib.exec(command);
+            public void exec(String command) {
+                Shell.cmd(command).exec();
             }
 
             @JavascriptInterface
-            public String cmdResult(String command) {
-                return Lib.execResult(command);
+            public String execResult(String command) {
+                return ShellUtils.fastCmd(command);
+            }
+
+            @JavascriptInterface
+            public Boolean isAppGrantedRoot() {
+                return Shell.isAppGrantedRoot();
             }
         }, Lib.interfaceName());
     }

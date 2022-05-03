@@ -9,8 +9,9 @@ import "./styles/default.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "onsenui/css/onsenui-core.min.css";
 import "./styles/components.scss";
+import Shell from "./utils/Shell";
 
-interface Props {}
+interface Props { }
 
 interface States {
   routeConfig: any;
@@ -20,9 +21,21 @@ interface States {
 class InitActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
+
+    const checkRoot = (): any => {
+      const appGrantedRoot = Shell.isAppGrantedRoot();
+      if (appGrantedRoot == null) {
+        return NoRoot;
+      } else if (appGrantedRoot) {
+        return App
+      } else {
+        return NoRoot
+      }
+    }
+
     const routeConfig = RouterUtil.init([
       {
-        component: App,
+        component: checkRoot(),
         props: {
           key: "main",
           pushPage: (...args: any) => this.pushPage.apply(null, args),
@@ -50,7 +63,7 @@ class InitActivity extends React.Component<Props, States> {
       window.onpopstate = () => {
         history.pushState("newjibberish", "", null);
         if (this.state.currentPage === "main") {
-          window.android.close();
+          //window.android.close();
         } else {
           this.popPage();
         }
