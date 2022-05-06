@@ -24,10 +24,8 @@ class InitActivity extends React.Component<Props, States> {
 
     const checkRoot = (): any => {
       const appGrantedRoot = Shell.isAppGrantedRoot();
-      if (appGrantedRoot == null) {
-        return NoRoot;
-      } else if (appGrantedRoot) {
-        return App
+      if (appGrantedRoot) {
+        return App;
       } else {
         return NoRoot
       }

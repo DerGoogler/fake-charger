@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Alert } from "react-bootstrap";
 import { Col, Input, List, ListItem, ListTitle, Row, Select } from "react-onsenui";
+import { Vibrator } from "../android";
 import CustomButton from "../components/CustomButton";
 import { ref } from "../utils/ref";
 import Shell from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
 
-interface Props {}
+interface Props { }
 
 interface States {
   vibrateLevel: string | undefined;
@@ -103,10 +104,10 @@ class Tab3 extends React.Component<Props, States> {
                 onClick={() => {
                   this.deviceSp({
                     samsung: () => {
-                      new Shell(`cmd vibrator vibrate ${this.state.vibrateLevel}`).exec();
+                      Vibrator.samsung(this.state.vibrateLevel)
                     },
                     aosp: () => {
-                      new Shell(`cmd vibrator_manager synced oneshot ${this.state.vibrateLevel}`).exec();
+                      Vibrator.aosp(this.state.vibrateLevel)
                     },
                   });
                 }}
@@ -119,10 +120,10 @@ class Tab3 extends React.Component<Props, States> {
                 onClick={() => {
                   this.deviceSp({
                     samsung: () => {
-                      new Shell(`cmd vibrator cancel`).exec();
+                      Vibrator.samsungCancel();
                     },
                     aosp: () => {
-                      new Shell(`cmd vibrator_manager cancel`).exec();
+                      Vibrator.aospCancel();
                     },
                   });
                 }}

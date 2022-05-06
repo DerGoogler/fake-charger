@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Input, List, ListItem, ListTitle } from "react-onsenui";
+import { Battery } from "../android";
 import CustomButton from "../components/CustomButton";
-import Shell from "../utils/Shell";
-import Shellj from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
 
 interface Props { }
@@ -34,11 +33,11 @@ class Tab1 extends React.Component<Props, States> {
     }
 
     for (var i = 0; i < points.length; i++) {
-      new Shell(`cmd battery set level ${points[i]}`).exec();
+      Battery.set(points[i]);
       await this.delay(Number(delayBetween));
     }
     this.delay(Number(resetDelay)).then(() => {
-      new Shell("cmd battery reset -f").exec();
+      Battery.reset();
     });
   };
 

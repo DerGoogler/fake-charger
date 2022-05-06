@@ -1,11 +1,9 @@
 import * as React from "react";
 import { Col, Input, List, ListItem, ListTitle, Row } from "react-onsenui";
+import { Battery } from "../android";
 import CustomButton from "../components/CustomButton";
-import Shell from "../utils/Shell";
-import Shellj from "../utils/Shell";
 import { numbersOnly } from "../utils/textFilter";
-import utils from "../utils/utils";
-interface Props {}
+interface Props { }
 
 interface States {
   batteryLevel: string | undefined;
@@ -48,7 +46,7 @@ class Tab2 extends React.Component<Props, States> {
           <Col>
             <CustomButton
               onClick={() => {
-                new Shell(`cmd battery set level ${this.state.batteryLevel}`).exec();
+                Battery.set(this.state.batteryLevel);
               }}
             >
               Set
@@ -57,7 +55,7 @@ class Tab2 extends React.Component<Props, States> {
           <Col>
             <CustomButton
               onClick={() => {
-                new Shell(`cmd battery reset`).exec();
+                Battery.reset();
               }}
             >
               Reset
@@ -66,7 +64,7 @@ class Tab2 extends React.Component<Props, States> {
         </Row>
         <CustomButton
           onClick={() => {
-            this.setState({ batteryLevel: numbersOnly(utils.getBatteryLevel) });
+            this.setState({ batteryLevel: numbersOnly(Battery.getLevel) });
           }}
         >
           Get current level

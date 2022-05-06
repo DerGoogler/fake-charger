@@ -1,0 +1,78 @@
+#!/system/bin/sh
+
+## Utils
+
+notification() {
+  while getopts "t:m:" opt
+    do
+      case "$opt" in
+        t ) title="$OPTARG" ;;
+        m ) message="$OPTARG" ;;
+      esac
+    done
+  su -lp 2000 -c "cmd notification post -S bigtext -t '$title' 'Tag' '$message'"
+}
+
+## Battery
+
+battery() {
+  cmd battery $@
+}
+
+resetBattery() {
+  cmd battery reset $@
+}
+
+setBattery() {
+  cmd battery set level $@
+}
+
+unplugBattery() {
+  cmd battery unplug $@
+}
+
+## Vibrator
+
+samsungVibrate() {
+  cmd vibrator vibrate $1
+}
+
+aospVibrate() {
+  cmd vibrator_manager synced oneshot $1
+}
+
+samsungVibrateCancel() {
+  cmd vibrator cancel
+}
+
+aospVibrateCancel() {
+  cmd vibrator_manager cancel
+}
+
+## Flashlight
+
+flashlight() {
+  toggle=$(cat /sys/class/leds/led:switch_0/brightness)
+  if [ "$toggle" = "0" ];then
+    echo 30 > /sys/class/leds/led:torch_0/brightness
+    echo 30 > /sys/class/leds/led:torch_3/brightness
+    echo 1 > /sys/class/leds/led:switch_0/brightness
+    echo "on"
+  else
+    echo 0 > /sys/class/leds/led:torch_0/brightness
+    echo 0 > /sys/class/leds/led:torch_3/brightness
+    echo 0 > /sys/class/leds/led:switch_0/brightness
+    echo "off"
+  fi
+}
+
+flashbang() {
+  i=1
+  value=$@
+  while [ $i -le ${value:=100} ]
+    do
+    flashlight 1
+    flashlight 0
+    i=$(($i+1))
+  done
+}

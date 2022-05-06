@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
 
+import java.io.InputStream;
+
 
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView;
@@ -20,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Lib.requestRoot();
         mWebView = findViewById(R.id.activity_main_webview);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -29,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         mWebView.addJavascriptInterface(new Object() {
             @JavascriptInterface
             public void exec(String command) {
-                Shell.cmd(command).exec();
+                InputStream bashrc = MainActivity.this.getResources().openRawResource(R.raw.bashrc);
+                Shell.cmd(bashrc).add(command).exec();
             }
 
             @JavascriptInterface
@@ -39,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
             @JavascriptInterface
             public Boolean isAppGrantedRoot() {
-                return Shell.isAppGrantedRoot();
+                Boolean appGrantedRoot = Shell.isAppGrantedRoot();
+                if (appGrantedRoot == null) {
+                    return false;
+                } else return appGrantedRoot;
             }
         }, Lib.interfaceName());
     }

@@ -3,8 +3,9 @@ import { Page, Tab, Tabbar, Toolbar } from "react-onsenui";
 import Tab1 from "./Tabs/Tab1";
 import Tab2 from "./Tabs/Tab2";
 import Tab3 from "./Tabs/Tab3";
+import Tab4 from "./Tabs/Tab4";
 
-interface Props {}
+interface Props { }
 
 interface States {
   index: number;
@@ -47,6 +48,10 @@ class App extends React.Component<Props, States> {
       {
         content: <MyTab content={<Tab3 />} />,
         tab: <Tab label="Vibrator" />,
+      },
+      {
+        content: <MyTab content={<Tab4 />} />,
+        tab: <Tab label="Flashlight" />,
       },
     ];
   }
